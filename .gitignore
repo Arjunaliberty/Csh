@@ -1,2 +1,7 @@
 *.exe
 *.dll
+.git/
+bin/
+obj/
+packages/
+Properties/
