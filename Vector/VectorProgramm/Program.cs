@@ -50,7 +50,7 @@ namespace VectorProgramm
 
             Console.Write("Введите число для умножения на второй вектор: ");
             k = Double.Parse(Console.ReadLine());
-            resultVector = vectors[0] * k;
+            resultVector = vectors[1] * k;
             Console.WriteLine("Произведение второго вектора на число дает третий вектор с координатами x: {0}, y: {1}, z: {2}", resultVector.v.x, resultVector.v.y, resultVector.v.z);
             Console.WriteLine("Длина второго вектора после умножения на число равна {0}", resultVector.VectorLen());
 
