@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vector", "Vector\Vector.csp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VectorProgramm", "VectorProgramm\VectorProgramm.csproj", "{A8D005C4-D3DC-4767-87EF-65F66C521C69}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VectorUnitTest", "VectorUnitTest\VectorUnitTest.csproj", "{D1F73581-D010-41FD-8878-2FBC5C4C2D98}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{A8D005C4-D3DC-4767-87EF-65F66C521C69}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A8D005C4-D3DC-4767-87EF-65F66C521C69}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A8D005C4-D3DC-4767-87EF-65F66C521C69}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D1F73581-D010-41FD-8878-2FBC5C4C2D98}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D1F73581-D010-41FD-8878-2FBC5C4C2D98}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D1F73581-D010-41FD-8878-2FBC5C4C2D98}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D1F73581-D010-41FD-8878-2FBC5C4C2D98}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
