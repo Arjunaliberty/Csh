@@ -18,6 +18,9 @@ namespace MyClicker
         public int rightDownX { get; set; }
         public int rightDownY { get; set; }
 
+        // Свойство для хранения направления движения фигуры
+        public bool direct { get; set; }
+
         // Поле для хранения время жизни фигуры (time to life)
         public int ttl { get; set; }
 
@@ -44,39 +47,28 @@ namespace MyClicker
         // Функция для передвижения фигуры по вертикали вниз
         public void MoveDown()
         {
-            if (rightDownY < maxY)
-            {
-                leftUpY++;
-                rightDownY++;
-            }
+            leftUpY += 2;
+            rightDownY +=2;
+            
 
         }
         // Функция для передвижения фигуры по вертикали вверх
         public void MoveUp()
         {
-            if (leftUpY > 0)
-            {
-                leftUpY--;
-                rightDownY--;
-            }
+            leftUpY -= 2;
+            rightDownY -=2;
         }
         // Функция для передвижения фигуры вправо по горизонтали
         public void MoveRight()
         {
-            if (rightDownX < maxX)
-            {
-                leftUpX++;
-                rightDownX++;
-            }
+            leftUpX++;
+            rightDownX++;
         }
         // Функция для перемещения фигуры влево по горизонтали
         public void MoveLeft()
         {
-            if(leftUpX > 0)
-            {
-                leftUpX--;
-                rightDownX--;
-            }
+            leftUpX--;
+            rightDownX--;
         }
         // Виртуальная функция для возвращения количества очков при попадании на фигуру
         public abstract int GetScore();

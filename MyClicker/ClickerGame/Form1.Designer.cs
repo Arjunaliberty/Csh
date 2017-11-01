@@ -36,20 +36,24 @@
             // score
             // 
             this.score.AutoSize = true;
-            this.score.Location = new System.Drawing.Point(337, 9);
+            this.score.BackColor = System.Drawing.SystemColors.Control;
+            this.score.ForeColor = System.Drawing.Color.DarkRed;
+            this.score.Location = new System.Drawing.Point(249, 9);
             this.score.Name = "score";
             this.score.Size = new System.Drawing.Size(0, 13);
             this.score.TabIndex = 0;
             // 
             // timer1
             // 
+            this.timer1.Interval = 200;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(384, 361);
+            this.BackColor = System.Drawing.SystemColors.Control;
+            this.ClientSize = new System.Drawing.Size(284, 261);
             this.Controls.Add(this.score);
             this.Name = "Form1";
             this.Text = "Form1";

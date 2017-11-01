@@ -68,9 +68,9 @@ namespace ClickerGame
             // Инициализируем переменный
             x0 = rnd.Next(0, this.Width);
             y0 = rnd.Next(0, this.Height);
-            r = rnd.Next(1, 15);
-            ttl = rnd.Next(15, 30);
-            type = 1;
+            r = rnd.Next(1, 10);
+            ttl = rnd.Next(15, 120);
+            type = rnd.Next(1, 3);
             color = Color.FromArgb(rnd.Next(0, 255), rnd.Next(0, 255), rnd.Next(0, 255), rnd.Next(0, 255));
 
             switch (type)
@@ -80,9 +80,39 @@ namespace ClickerGame
                     figures.Add(new Circle(x0 - r, y0 - r, x0 + r, y0 + r, ttl, this.Width, this.Height, color, this.gameField));
                     break;
                 case 2:
+                    figures.Add(new Quadrate(x0 - r, y0 - r, x0 + r, y0 + r, ttl, this.Width, this.Height, color, this.gameField));
                     break;
                 case 3:
                     break;
+            }
+        }
+        // Метод для пермещения фигур по экрану
+        private void MoveFigure()
+        {
+            foreach (var fgr in figures)
+            {
+                if (fgr.leftUpY <= 0 && fgr.rightDownY < this.Height)
+                {
+                    fgr.direct = true;
+                    fgr.ClearDraw(this.BackColor);
+                    fgr.MoveDown();
+                }
+                else if ((fgr.leftUpY > 0 && fgr.rightDownY < this.Height) && fgr.direct)
+                {
+                    fgr.ClearDraw(this.BackColor);
+                    fgr.MoveDown();
+                }
+                else if (fgr.leftUpY > 0 && fgr.rightDownY >= this.Height)
+                {
+                    fgr.direct = false;
+                    fgr.ClearDraw(this.BackColor);
+                    fgr.MoveUp();
+                }
+                else if ((fgr.leftUpY > 0 && fgr.rightDownY < this.Height) && !fgr.direct)
+                {
+                    fgr.ClearDraw(this.BackColor);
+                    fgr.MoveUp();
+                }
             }
         }
         // Метод обрабатывающий щелчек мыши по фигуре
@@ -103,7 +133,6 @@ namespace ClickerGame
             }
             figures.Remove(delFigure);
         }
-
         public Form1()
         {
             InitializeComponent();
@@ -120,6 +149,7 @@ namespace ClickerGame
         {
             AddNewFigures();
             TTL();
+            MoveFigure();
             DrawFigures();
         }
     }
