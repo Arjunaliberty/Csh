@@ -54,6 +54,7 @@
             this.Name = "Form1";
             this.Text = "Form1";
             this.DoubleClick += new System.EventHandler(this.Form1_DoubleClick);
+            this.MouseClick += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseClick);
             this.ResumeLayout(false);
             this.PerformLayout();
 

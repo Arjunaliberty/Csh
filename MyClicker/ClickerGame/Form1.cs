@@ -15,8 +15,6 @@ namespace ClickerGame
     {
         // Поле для хранения счета
         private int scr;
-        // Поле для хранения ???
-        private int gen;
         // Поле для хранения игровой области
         private Graphics gameField = null;
         // Коллекция для хранения объектов типа Figure
@@ -48,18 +46,63 @@ namespace ClickerGame
                     // И удаляем фигуру с экрана (делаем ее цвет такойже как и основного поля)
                     fgr.ClearDraw(this.BackColor);
                 }
-                // Удаляем фигуры из очереди удаления, а потом из общей коллекции
-                while(delFigures.Count > 0)
-                {
-                    figures.Remove(delFigures.Dequeue());
-                }
+            }
+            // Удаляем фигуры из очереди удаления, а потом из общей коллекции
+            while (delFigures.Count > 0)
+            {
+                figures.Remove(delFigures.Dequeue());
             }
         }
+        // Метод для добавления новой фигуры
+        private void AddNewFigures()
+        {
+            // Поля для хранения координат и время жизни фигуры (для передачи конструктору Figure)
+            int x0, y0, r, ttl;
+            // Поле для хранения типа фигуры (для передачи конструктору Figure)
+            int type;
+            // Поле для хранения цвета фигуры (для передачи конструктору Figure)
+            Color color;
+            // Создаем тип для работы с классом Random
+            Random rnd = new Random();
 
+            // Инициализируем переменный
+            x0 = rnd.Next(0, this.Width);
+            y0 = rnd.Next(0, this.Height);
+            r = rnd.Next(1, 15);
+            ttl = rnd.Next(15, 30);
+            type = 1;
+            color = Color.FromArgb(rnd.Next(0, 255), rnd.Next(0, 255), rnd.Next(0, 255), rnd.Next(0, 255));
 
+            switch (type)
+            {
+                case 1:
+                    // Добавляем элемент в список figures
+                    figures.Add(new Circle(x0 - r, y0 - r, x0 + r, y0 + r, ttl, this.Width, this.Height, color, this.gameField));
+                    break;
+                case 2:
+                    break;
+                case 3:
+                    break;
+            }
+        }
+        // Метод обрабатывающий щелчек мыши по фигуре
+        private void Form1_MouseClick(object sender, MouseEventArgs e)
+        {
+            // Поле для хранения удаляемой фигуры
+            Figure delFigure = null;
 
-
-
+            foreach (var fgr in figures)
+            {
+                if (fgr.CheckPoint(e.X, e.Y))
+                {
+                    delFigure = fgr;
+                    scr += fgr.GetScore();
+                    fgr.ClearDraw(this.BackColor);
+                    score.Text = scr.ToString();
+                }
+            }
+            figures.Remove(delFigure);
+        }
 
         public Form1()
         {
@@ -69,12 +112,15 @@ namespace ClickerGame
 
         private void Form1_DoubleClick(object sender, EventArgs e)
         {
-            
+            timer1.Start();
         }
 
+        // В метод таймер записываем последовательность вызовов необходимых функций
         private void timer1_Tick(object sender, EventArgs e)
         {
-
+            AddNewFigures();
+            TTL();
+            DrawFigures();
         }
     }
 }

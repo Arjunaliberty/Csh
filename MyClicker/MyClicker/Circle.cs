@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace MyClicker
 {
-    class Circle : Figure
+    public class Circle : Figure
     {
         public Circle(int leftUpX, int leftUpY, int rightDownX, int rightDownY, int ttl, int maxX, int maxY, Color color, Graphics gameField) :
                base (leftUpX, leftUpY, rightDownX, rightDownY, ttl, maxX, maxY, color, gameField)
