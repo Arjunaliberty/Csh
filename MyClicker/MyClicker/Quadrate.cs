@@ -9,8 +9,8 @@ namespace MyClicker
 {
     public class Quadrate : Figure
     {
-        public Quadrate(int leftUpX, int leftUpY, int rightDownX, int rightDownY, int ttl, int maxX, int maxY, Color color, Graphics gameField) :
-               base (leftUpX, leftUpY, rightDownX, rightDownY, ttl, maxX, maxY, color, gameField)
+        public Quadrate(int leftUpX, int leftUpY, int rightDownX, int rightDownY, int ttl, int maxX, int maxY, int direct, Color color, Graphics gameField) :
+               base (leftUpX, leftUpY, rightDownX, rightDownY, ttl, maxX, maxY, direct, color, gameField)
         {
 
         }

@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Threading;
 
 namespace ClickerGame
 {
@@ -57,32 +58,36 @@ namespace ClickerGame
         private void AddNewFigures()
         {
             // Поля для хранения координат и время жизни фигуры (для передачи конструктору Figure)
-            int x0, y0, r, ttl;
+            int x0, y0, r, ttl, direct;
             // Поле для хранения типа фигуры (для передачи конструктору Figure)
             int type;
             // Поле для хранения цвета фигуры (для передачи конструктору Figure)
             Color color;
             // Создаем тип для работы с классом Random
             Random rnd = new Random();
-
+            
             // Инициализируем переменный
             x0 = rnd.Next(0, this.Width);
             y0 = rnd.Next(0, this.Height);
-            r = rnd.Next(1, 10);
-            ttl = rnd.Next(15, 120);
-            type = rnd.Next(1, 3);
+            ttl = rnd.Next(15, 30);
+            type = rnd.Next(1, 4);
+            direct = rnd.Next(1, 5);
             color = Color.FromArgb(rnd.Next(0, 255), rnd.Next(0, 255), rnd.Next(0, 255), rnd.Next(0, 255));
 
             switch (type)
             {
                 case 1:
                     // Добавляем элемент в список figures
-                    figures.Add(new Circle(x0 - r, y0 - r, x0 + r, y0 + r, ttl, this.Width, this.Height, color, this.gameField));
+                    r = rnd.Next(10, 15);
+                    figures.Add(new Circle(x0 - r, y0 - r, x0 + r, y0 + r, ttl, this.Width, this.Height, direct, color, this.gameField));
                     break;
                 case 2:
-                    figures.Add(new Quadrate(x0 - r, y0 - r, x0 + r, y0 + r, ttl, this.Width, this.Height, color, this.gameField));
+                    r = rnd.Next(5, 10);
+                    figures.Add(new Quadrate(x0 - r, y0 - r, x0 + r, y0 + r, ttl, this.Width, this.Height, direct, color, this.gameField));
                     break;
                 case 3:
+                    r = rnd.Next(3, 5);
+                    figures.Add(new Triangle(x0 - r, y0 - r, x0 + r, y0 + r, ttl, this.Width, this.Height, direct, color, this.gameField));
                     break;
             }
         }
@@ -91,27 +96,24 @@ namespace ClickerGame
         {
             foreach (var fgr in figures)
             {
-                if (fgr.leftUpY <= 0 && fgr.rightDownY < this.Height)
+                switch (fgr.direct)
                 {
-                    fgr.direct = true;
-                    fgr.ClearDraw(this.BackColor);
-                    fgr.MoveDown();
-                }
-                else if ((fgr.leftUpY > 0 && fgr.rightDownY < this.Height) && fgr.direct)
-                {
-                    fgr.ClearDraw(this.BackColor);
-                    fgr.MoveDown();
-                }
-                else if (fgr.leftUpY > 0 && fgr.rightDownY >= this.Height)
-                {
-                    fgr.direct = false;
-                    fgr.ClearDraw(this.BackColor);
-                    fgr.MoveUp();
-                }
-                else if ((fgr.leftUpY > 0 && fgr.rightDownY < this.Height) && !fgr.direct)
-                {
-                    fgr.ClearDraw(this.BackColor);
-                    fgr.MoveUp();
+                    case 1:
+                        fgr.ClearDraw(this.BackColor);
+                        fgr.MoveDown();
+                        break;
+                    case 2:
+                        fgr.ClearDraw(this.BackColor);
+                        fgr.MoveDown();
+                        break;
+                    case 3:
+                        fgr.ClearDraw(this.BackColor);
+                        fgr.MoveLeft();
+                        break;
+                    case 4:
+                        fgr.ClearDraw(this.BackColor);
+                        fgr.MoveRight();
+                        break;
                 }
             }
         }
@@ -151,6 +153,11 @@ namespace ClickerGame
             TTL();
             MoveFigure();
             DrawFigures();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

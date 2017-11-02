@@ -19,7 +19,7 @@ namespace MyClicker
         public int rightDownY { get; set; }
 
         // Свойство для хранения направления движения фигуры
-        public bool direct { get; set; }
+        public int direct { get; set; }
 
         // Поле для хранения время жизни фигуры (time to life)
         public int ttl { get; set; }
@@ -33,13 +33,14 @@ namespace MyClicker
         // Поле для хранения цвета фигуры
         protected Color color;
 
-        public Figure(int leftUpX, int leftUpY, int rightDownX, int rightDownY, int ttl, int maxX, int maxY, Color color, Graphics gameField)
+        public Figure(int leftUpX, int leftUpY, int rightDownX, int rightDownY, int ttl, int maxX, int maxY, int direct, Color color, Graphics gameField)
         {
             this.leftUpX = leftUpX;
             this.leftUpY = leftUpY;
             this.rightDownX = rightDownX;
             this.rightDownY = rightDownY;
             this.ttl = ttl;
+            this.direct = direct;
             this.color = color;
             this.gameField = gameField;
         }
