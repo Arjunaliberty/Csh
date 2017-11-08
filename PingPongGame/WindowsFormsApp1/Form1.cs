@@ -64,26 +64,25 @@ namespace WindowsFormsApp1
                 leftPad.ClearDraw();
                 ball.x = this.Width / 2;
                 ball.y = this.Height / 2;
+                ball.b = this.Height / 2 + this.Width / 2;
+                ball.k = -1;
                 rightPad.y = this.Height / 2 - HEIGHT_PAD / 2;
                 leftPad.y = this.Height / 2 - HEIGHT_PAD / 2;
-                ball.Draw();
-                rightPad.Draw();
-                leftPad.Draw();
             }
             else if (ball.CheckMaxX())
             {
                 scorePad1 += 5;
                 this.label2.Text = scorePad1.ToString();
+
                 ball.ClearDraw();
                 rightPad.ClearDraw();
                 leftPad.ClearDraw();
                 ball.x = this.Width / 2;
                 ball.y = this.Height / 2;
+                ball.b = this.Height / 2 + this.Width / 2;
+                ball.k = -1;
                 rightPad.y = this.Height / 2 - HEIGHT_PAD / 2;
                 leftPad.y = this.Height / 2 - HEIGHT_PAD / 2;
-                ball.Draw();
-                rightPad.Draw();
-                leftPad.Draw();
             }
         }
 

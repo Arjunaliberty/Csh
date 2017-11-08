@@ -30,12 +30,12 @@ namespace PingPongClassLibrary
         /// <summary>
         /// k - коэффициент наклона прямой
         /// </summary>
-        private double k; // y=k*x+b
+        public double k { get; set; } // y=k*x+b
 
         /// <summary>
         /// b - константа
         /// </summary>
-        private double b;
+        public double b { get;  set; }
 
         public Ball(int x, int y, int r, Color color, int speed, GameField gameField, double k, double b)
         {
@@ -85,7 +85,6 @@ namespace PingPongClassLibrary
             return k * x + b;
         }
        
-
         /// <summary>
         /// Метод проверяет вышла ли координа (x) шарика за левый предел игрового поля
         /// </summary>
