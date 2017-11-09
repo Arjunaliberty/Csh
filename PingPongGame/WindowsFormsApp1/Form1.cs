@@ -16,7 +16,10 @@ namespace WindowsFormsApp1
     {
         const int WIDTH_PAD = 5;
         const int HEIGHT_PAD = 50;
+        const int RACKET_SPEED = 6;
         const int BALL_RAD = 5;
+        const int BALL_SPEED = 2;
+
 
         Ball ball;
         GameField gameField;
@@ -31,9 +34,9 @@ namespace WindowsFormsApp1
         {
             InitializeComponent();
             gameField = new GameField(0, 20, this.Width - 15, this.Height - 35, this.BackColor, this.CreateGraphics());
-            leftPad = new RacketPad(0, (this.Height / 2) - (HEIGHT_PAD / 2), WIDTH_PAD, HEIGHT_PAD, Color.Lime, 4, gameField);
-            rightPad = new RacketPad(this.Width - 20, (this.Height / 2) - (HEIGHT_PAD / 2), WIDTH_PAD, HEIGHT_PAD, Color.Red, 4, gameField);
-            ball = new Ball(this.Width / 2, this.Height / 2, BALL_RAD, Color.Blue, 1, gameField, -1, this.Height / 2 + this.Width / 2);
+            leftPad = new RacketPad(0, (this.Height / 2) - (HEIGHT_PAD / 2), WIDTH_PAD, HEIGHT_PAD, Color.Lime, RACKET_SPEED, gameField);
+            rightPad = new RacketPad(this.Width - 20, (this.Height / 2) - (HEIGHT_PAD / 2), WIDTH_PAD, HEIGHT_PAD, Color.Red, RACKET_SPEED, gameField);
+            ball = new Ball(this.Width / 2, this.Height / 2, BALL_RAD, Color.Blue, BALL_SPEED, gameField, -1, this.Height / 2 + this.Width / 2);
         }
 
         private void Form1_DoubleClick(object sender, EventArgs e)
