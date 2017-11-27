@@ -1,126 +1,70 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Collections.Generic;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace TanksClass
 {
-    public class Bullet
+    public class Bullet : Figures
     {
-        /// <summary>
-        /// Константа для хранения раземра снаряда
-        /// </summary>
-        const int BULLET_LENGHT = 2;
-
-        /// <summary>
-        /// Начальная координата x равная координате x ствола танка
-        /// </summary>
+        const int LENGTH = 9;
+        const int HIGHT = 3;
         public int x0 { get; private set; }
-        /// <summary>
-        /// Начальная координата y равная координате y ствола танка
-        /// </summary>
         public int y0 { get; private set; }
-        /// <summary>
-        /// Время жизни снаряда time to life
-        /// </summary>
-        public int ttl { get; set; }
-        /// <summary>
-        /// Скорость движения снаряда 
-        /// </summary>
         public int speed { get; set; }
-        /// <summary>
-        /// Мощность снаряда
-        /// </summary>
-        public int power { get; set; }
-        /// <summary>
-        /// Напрвление движения танка и соответсвенно снаряда
-        /// </summary>
-        private TankDirect tankDirect { get; set; }
-
-        /// <summary>
-        /// Объкт типа танк для доступа к данным о мощности выстрел, направления движения и т.п.
-        /// </summary>
-        Tank tank = null;
+        public int power { get; private set; }
+        public int ttl { get; set; }
         private Color color;
-        private Graphics graphics = null;
+        private GameField gameField = null;
+        private Point[] point;
 
-        public Bullet(int ttl, int speed, Tank tank)
+        public Bullet(int x0, int y0, int speed, int power, int ttl, Color color, GameField gameField)
         {
-            this.ttl = ttl;
+            this.x0 = x0;
+            this.y0 = y0;
             this.speed = speed;
-            this.x0 = tank.GetXBarell();
-            this.y0 = tank.GetYBarell();
-            this.power = tank.power; ;
-            this.tankDirect = tank.tankDirect;
-            this.color = tank.color;
-            this.graphics = tank.graphics;
+            this.power = power;
+            this.ttl = ttl;
+            this.color = color;
+            this.gameField = gameField;
+            this.point = new Point[] { new Point(x0, y0), new Point(x0, y0 - HIGHT), new Point(x0 + LENGTH, y0), new Point(x0, y0 + HIGHT), new Point(x0, y0)};
         }
 
-       /// <summary>
-       /// Метод отрисовки снаряда
-       /// </summary>
-        public void ShowBullet()
+        /// <summary>
+        /// Метод для перемещения снаряда по оси x
+        /// </summary>
+        public void MoveX()
         {
-            if (tankDirect == TankDirect.LEFT)
-            {
-                graphics.DrawLine(new Pen(color), x0, y0, x0 + BULLET_LENGHT, y0);
-            }
-            if (tankDirect == TankDirect.RIGHT)
-            {
-                graphics.DrawLine(new Pen(color), x0, y0, x0 - BULLET_LENGHT, y0);
-            }
-            if (tankDirect == TankDirect.UP)
-            {
-                graphics.DrawLine(new Pen(color), x0, y0, x0, y0 - BULLET_LENGHT);
-            }
-            if (tankDirect == TankDirect.DOWN)
-            {
-                graphics.DrawLine(new Pen(color), x0, y0, x0, y0 + BULLET_LENGHT);
-            }
+            this.x0 += speed;
+            this.point = new Point[] { new Point(x0, y0), new Point(x0, y0 - HIGHT), new Point(x0 + LENGTH, y0), new Point(x0, y0 + HIGHT), new Point(x0, y0) };
+        }
+
+        /// <summary>
+        /// Метод перемещения снаряда по оси y
+        /// </summary>
+        public void MoveY()
+        {
+            this.y0 += speed;
+            this.point = new Point[] { new Point(x0, y0), new Point(x0, y0 - HIGHT), new Point(x0 + LENGTH, y0), new Point(x0, y0 + HIGHT), new Point(x0, y0) };
+        }
+
+        /// <summary>
+        /// Метод отрисовки снаряда на экране
+        /// </summary>
+        public override void ShowDraw()
+        {
+            gameField.graphics.FillPolygon(new SolidBrush(color), point);
         }
 
         /// <summary>
         /// Метод стирания снаряда с экрана
         /// </summary>
-        /// <param name="clrColor">Цвет снаряда</param>
-        public void ClearBullet(Color clrColor)
+        /// <param name="clrColor"></param>
+        public override void ClearDraw(Color clrColor)
         {
-            if (tankDirect == TankDirect.LEFT)
-            {
-                graphics.DrawLine(new Pen(clrColor), x0, y0, x0 + BULLET_LENGHT, y0);
-            }
-            if (tankDirect == TankDirect.RIGHT)
-            {
-                graphics.DrawLine(new Pen(clrColor), x0, y0, x0 - BULLET_LENGHT, y0);
-            }
-            if (tankDirect == TankDirect.UP)
-            {
-                graphics.DrawLine(new Pen(clrColor), x0, y0, x0, y0 - BULLET_LENGHT);
-            }
-            if (tankDirect == TankDirect.DOWN)
-            {
-                graphics.DrawLine(new Pen(clrColor), x0, y0, x0, y0 + BULLET_LENGHT);
-            }
-        }
-
-        /// <summary>
-        /// Метод для перемещения снаряда
-        /// </summary>
-        public void MoveBullet()
-        {
-            if (tankDirect == TankDirect.LEFT)
-            {
-                x0 += speed;
-            }
-            if (tankDirect == TankDirect.RIGHT)
-            {
-                x0 -= speed;
-            }
-            if (tankDirect == TankDirect.UP)
-            {
-                y0 -= speed;
-            }
-            if (tankDirect == TankDirect.DOWN)
-            {
-                y0 += speed;
-            }
+            gameField.graphics.FillPolygon(new SolidBrush(clrColor), point);
         }
     }
 }

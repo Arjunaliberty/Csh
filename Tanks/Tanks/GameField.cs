@@ -9,22 +9,45 @@ namespace TanksClass
 {
    public class GameField
     {
+        /// <summary>
+        /// Свойство для хранения верхней левой координаты x игрового поля
+        /// </summary>
+        public double minX { get; private set; }
 
-        public double minX { get; set; }
-        public double minY { get; set; }
-        public double maxX { get; set; }
-        public double maxY { get; set; }
-        public Color color { get; set; }
-        public Graphics graphics { get; set; }
+        /// <summary>
+        /// Свойство для хранения верхней левой координаты y игрового поля
+        /// </summary>
+        public double minY { get; private set; }
 
+        /// <summary>
+        /// Свойство для хранения нижней правой координаты x игрового поля
+        /// </summary>
+        public double maxX { get; private set; }
 
-        Tank tank1;
-        Tank tank2;
-        Bullet bullet1;
-        Bullet bullet2;
-        List<Wall> wall;
-        List<Bonus> List;
+        /// <summary>
+        /// Свойство для хранения нижней правой координаты y игрового поля
+        /// </summary>
+        public double maxY { get; private set; }
 
+        /// <summary>
+        /// Поле для хранения цвета игрового поля
+        /// </summary>
+        public Color color { get; private set; }
+
+        /// <summary>
+        /// Поле для хранения канвы игрового поля
+        /// </summary>
+        public Graphics graphics { get; private set; }
+
+        /// <summary>
+        /// Конструктор типа GameField
+        /// </summary>
+        /// <param name="minX"></param>
+        /// <param name="minY"></param>
+        /// <param name="maxX"></param>
+        /// <param name="maxY"></param>
+        /// <param name="color"></param>
+        /// <param name="graphics"></param>
         public GameField(double minX, double minY, double maxX, double maxY, Color color, Graphics graphics)
         {
             this.minX = minX;
@@ -34,50 +57,5 @@ namespace TanksClass
             this.color = color;
             this.graphics = graphics;
         }
-
-        /// <summary>
-        /// Метод проверяет вышла ли граница танка за координаты игрового поля
-        /// </summary>
-        /// <param name="tank"></param>
-        /// <returns>Возвращает true если коодинаты x или y танка выходят за границы игрового поля</returns>
-        private bool OutputBoundGameField(Tank tank)
-        {
-            if ((tank.GetXBarell() <= this.minX) || (tank.GetXBarell() >= this.maxX) || (tank.GetYBarell() <= this.minY) || (tank.GetYBarell() >= this.maxY))
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
-
-
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <returns></returns>
-        private bool OutputBoundWall(Tank tank)
-        {
-            if ((tank.GetXBarell() >= wall.))
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
-
-
-
-
-
-
-
-
-
-
-    }
+   }
 }

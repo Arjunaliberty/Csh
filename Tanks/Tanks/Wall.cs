@@ -1,28 +1,36 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace TanksClass
 {
-    public class Wall
+    public class Wall : Figures
     {
         /// <summary>
         /// Константа хранения значения ширины стены
         /// </summary>
-        const int WALL_WIDTH = 20;
+        const int WALL_WIDTH = 10;
+        
         /// <summary>
         /// Константа хранения значения высоты стены
         /// </summary>
         const int WALL_HIGHT = 50;
 
+        /// <summary>
+        /// Верхняя левая координата x стены
+        /// </summary>
         public int x0 { get; private set; }
+
+        /// <summary>
+        /// Верхняя левая координата y стены
+        /// </summary>
         public int y0 { get; private set; }
 
+        /// <summary>
+        /// Поле для хранения цвета стены
+        /// </summary>
         private Color color;
-        private Graphics graphics = null;
+
+        private GameField gameField = null;
 
         /// <summary>
         /// Конструктор
@@ -30,48 +38,48 @@ namespace TanksClass
         /// <param name="x0">Координата x верхнего левого угла стены</param>
         /// <param name="y0">Координата y верхнего левого угла стены</param>
         /// <param name="color">Параметр типа Color</param>
-        /// <param name="graphics">Параметр типа Graphics</param>
-        public Wall(int x0, int y0, Color color, Graphics graphics)
+        /// <param name="gameField">Параметр типа GameField</param>
+        public Wall(int x0, int y0, Color color, GameField gameField)
         {
             this.x0 = x0;
             this.y0 = y0;
             this.color = color;
-            this.graphics = graphics;
+            this.gameField = gameField;
         }
 
         /// <summary>
-        /// Метод отрисовки стены
+        /// Метод возвращает ширину стены
         /// </summary>
-        public void ShowWall()
+        /// <returns></returns>
+        public int GetWallWidth()
         {
-            graphics.FillRectangle(new SolidBrush(color), x0, y0, WALL_WIDTH, WALL_HIGHT);
+            return WALL_WIDTH;
         }
 
         /// <summary>
-        /// Метод стирания стены
+        /// Метод возвращает высоту стены
         /// </summary>
-        /// <param name="clrcolor">Параметр определяющий цвет стены</param>
-        public void ClearWall(Color clrcolor)
+        /// <returns></returns>
+        public int GetWallHight()
         {
-            graphics.FillRectangle(new SolidBrush(clrcolor), x0, y0, WALL_WIDTH, WALL_HIGHT);
+            return WALL_HIGHT;
         }
 
         /// <summary>
-        /// Метод определения крайней правой координаты x
+        /// Реализация метода по отрисовке стены на экране
         /// </summary>
-        /// <returns>Возвращает крайнею правую коордтинату x</returns>
-        public int FarBoundWallX()
+        public override void ShowDraw()
         {
-            return x0 + WALL_WIDTH;
+            gameField.graphics.FillRectangle(new SolidBrush(color), x0, y0, WALL_WIDTH, WALL_HIGHT);
         }
 
         /// <summary>
-        /// Метод определения крайней правой координаты y
+        /// Реализация метода по стиранию стеный с экрана
         /// </summary>
-        /// <returns>Возвращает крайнею правую коордтинату y</returns>
-        public int FarBoundWallY()
+        /// <param name="clrColor">Цвет канвы игрового поля</param>
+        public override void ClearDraw(Color clrColor)
         {
-            return y0 + WALL_HIGHT;
+            gameField.graphics.FillRectangle(new SolidBrush(clrColor), x0, y0, x0 + WALL_WIDTH, y0 + WALL_HIGHT);
         }
     }
 }
