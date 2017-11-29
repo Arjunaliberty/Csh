@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{5AFF5D7E-B43E-46ED-8955-48DB1A98C5B9}</ProjectGuid>
+    <ProjectGuid>{F011476D-495F-4EAF-B713-B54078040DB7}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <RootNamespace>TanksApp</RootNamespace>
     <AssemblyName>TanksApp</AssemblyName>

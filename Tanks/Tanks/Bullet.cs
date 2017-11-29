@@ -9,7 +9,7 @@ namespace TanksClass
 {
     public class Bullet : Figures
     {
-        const int LENGTH = 9;
+        const int WIDTH = 9;
         const int HIGHT = 3;
         public int x0 { get; private set; }
         public int y0 { get; private set; }
@@ -29,7 +29,7 @@ namespace TanksClass
             this.ttl = ttl;
             this.color = color;
             this.gameField = gameField;
-            this.point = new Point[] { new Point(x0, y0), new Point(x0, y0 - HIGHT), new Point(x0 + LENGTH, y0), new Point(x0, y0 + HIGHT), new Point(x0, y0)};
+            this.point = new Point[] { new Point(x0, y0), new Point(x0, y0 - HIGHT), new Point(x0 + WIDTH, y0), new Point(x0, y0 + HIGHT), new Point(x0, y0)};
         }
 
         /// <summary>
@@ -38,7 +38,7 @@ namespace TanksClass
         public void MoveX()
         {
             this.x0 += speed;
-            this.point = new Point[] { new Point(x0, y0), new Point(x0, y0 - HIGHT), new Point(x0 + LENGTH, y0), new Point(x0, y0 + HIGHT), new Point(x0, y0) };
+            this.point = new Point[] { new Point(x0, y0), new Point(x0, y0 - HIGHT), new Point(x0 + WIDTH, y0), new Point(x0, y0 + HIGHT), new Point(x0, y0) };
         }
 
         /// <summary>
@@ -47,8 +47,28 @@ namespace TanksClass
         public void MoveY()
         {
             this.y0 += speed;
-            this.point = new Point[] { new Point(x0, y0), new Point(x0, y0 - HIGHT), new Point(x0 + LENGTH, y0), new Point(x0, y0 + HIGHT), new Point(x0, y0) };
+            this.point = new Point[] { new Point(x0, y0), new Point(x0, y0 - HIGHT), new Point(x0 + WIDTH, y0), new Point(x0, y0 + HIGHT), new Point(x0, y0) };
         }
+
+        /// <summary>
+        /// Метод для определения координаты x крайней точки снаряда
+        /// </summary>
+        /// <returns>Возвращает координату x крайней точки снаряда</returns>
+        public int GetAverageX()
+        {
+            return x0 + WIDTH;
+        }
+
+        /// <summary>
+        /// Метод для определения координаты y крайней точки снаряда
+        /// </summary>
+        /// <returns>Возвращает координату y крайней точки снаряда</returns>
+
+        public int GetAverageY()
+        {
+            return y0;
+        }
+
 
         /// <summary>
         /// Метод отрисовки снаряда на экране

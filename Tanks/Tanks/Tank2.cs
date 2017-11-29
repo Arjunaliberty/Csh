@@ -7,10 +7,9 @@ using System.Threading.Tasks;
 
 namespace TanksClass
 {
-    public class Tank : Tanks
+    public class Tank2 : Tanks
     {
-
-        public Tank(int x0, int y0, int speed, int power, int armor, Color color, GameField gameField) : 
+        public Tank2(int x0, int y0, int speed, int power, int armor, Color color, GameField gameField) : 
                base(x0, y0, speed, power, armor, color, gameField)
         {
 
@@ -20,6 +19,5 @@ namespace TanksClass
         {
 
         }
-
     }
 }

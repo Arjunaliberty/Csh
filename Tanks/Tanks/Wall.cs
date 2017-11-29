@@ -8,12 +8,12 @@ namespace TanksClass
         /// <summary>
         /// Константа хранения значения ширины стены
         /// </summary>
-        const int WALL_WIDTH = 10;
+        const int WIDTH = 10;
         
         /// <summary>
         /// Константа хранения значения высоты стены
         /// </summary>
-        const int WALL_HIGHT = 50;
+        const int HIGHT = 50;
 
         /// <summary>
         /// Верхняя левая координата x стены
@@ -51,18 +51,18 @@ namespace TanksClass
         /// Метод возвращает ширину стены
         /// </summary>
         /// <returns></returns>
-        public int GetWallWidth()
+        public int GetWidth()
         {
-            return WALL_WIDTH;
+            return WIDTH;
         }
 
         /// <summary>
         /// Метод возвращает высоту стены
         /// </summary>
         /// <returns></returns>
-        public int GetWallHight()
+        public int GetHight()
         {
-            return WALL_HIGHT;
+            return HIGHT;
         }
 
         /// <summary>
@@ -70,7 +70,7 @@ namespace TanksClass
         /// </summary>
         public override void ShowDraw()
         {
-            gameField.graphics.FillRectangle(new SolidBrush(color), x0, y0, WALL_WIDTH, WALL_HIGHT);
+            gameField.graphics.FillRectangle(new SolidBrush(color), x0, y0, WIDTH, HIGHT);
         }
 
         /// <summary>
@@ -79,7 +79,7 @@ namespace TanksClass
         /// <param name="clrColor">Цвет канвы игрового поля</param>
         public override void ClearDraw(Color clrColor)
         {
-            gameField.graphics.FillRectangle(new SolidBrush(clrColor), x0, y0, x0 + WALL_WIDTH, y0 + WALL_HIGHT);
+            gameField.graphics.FillRectangle(new SolidBrush(clrColor), x0, y0, x0 + WIDTH, y0 + HIGHT);
         }
     }
 }

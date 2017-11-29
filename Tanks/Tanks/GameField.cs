@@ -12,22 +12,22 @@ namespace TanksClass
         /// <summary>
         /// Свойство для хранения верхней левой координаты x игрового поля
         /// </summary>
-        public double minX { get; private set; }
+        public int minX { get; private set; }
 
         /// <summary>
         /// Свойство для хранения верхней левой координаты y игрового поля
         /// </summary>
-        public double minY { get; private set; }
+        public int minY { get; private set; }
 
         /// <summary>
         /// Свойство для хранения нижней правой координаты x игрового поля
         /// </summary>
-        public double maxX { get; private set; }
+        public int maxX { get; private set; }
 
         /// <summary>
         /// Свойство для хранения нижней правой координаты y игрового поля
         /// </summary>
-        public double maxY { get; private set; }
+        public int maxY { get; private set; }
 
         /// <summary>
         /// Поле для хранения цвета игрового поля
@@ -48,7 +48,7 @@ namespace TanksClass
         /// <param name="maxY"></param>
         /// <param name="color"></param>
         /// <param name="graphics"></param>
-        public GameField(double minX, double minY, double maxX, double maxY, Color color, Graphics graphics)
+        public GameField(int minX, int minY, int maxX, int maxY, Color color, Graphics graphics)
         {
             this.minX = minX;
             this.minY = minY;
@@ -56,6 +56,11 @@ namespace TanksClass
             this.maxY = maxY;
             this.color = color;
             this.graphics = graphics;
+        }
+
+        public void ShowDraw()
+        {
+            graphics.DrawRectangle(new Pen(Color.Red), minX, minY, minX + maxX, minY + maxY);
         }
    }
 }

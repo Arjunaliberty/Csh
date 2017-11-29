@@ -9,7 +9,7 @@ namespace TanksClass
 {
     public abstract class Tanks : Figures
     {
-        const int LENGTH = 24;
+        const int WIDTH = 24;
         const int HIGHT = 8;
         public int x0 { get; set; }
         public int y0 { get; set; }
@@ -29,7 +29,17 @@ namespace TanksClass
             this.armor = armor;
             this.color = color;
             this.gameField = gameField;
-            this.point = new Point[] {new Point(x0, y0), new Point(x0 + LENGTH, y0 + HIGHT), new Point(x0, y0 + 2 * HIGHT), new Point(x0, y0)};
+            this.point = new Point[] {new Point(x0, y0), new Point(x0 + WIDTH, y0 + HIGHT), new Point(x0, y0 + 2 * HIGHT), new Point(x0, y0)};
+        }
+
+        public int GetWidth()
+        {
+            return WIDTH;
+        }
+
+        public int GetHight()
+        {
+            return HIGHT;
         }
 
         /// <summary>
@@ -38,14 +48,13 @@ namespace TanksClass
         /// <returns></returns>
         private int GetAverageX()
         {
-            return x0 + LENGTH;
+            return x0 + WIDTH;
         }
 
         /// <summary>
         /// Метод для получения координаты y центра ствола
         /// </summary>
         /// <returns></returns>
-
         private int GetAverageY()
         {
             return y0 + HIGHT;
@@ -54,17 +63,31 @@ namespace TanksClass
         /// <summary>
         /// Метод для премещения танка по оси x
         /// </summary>
-        public void MoveX()
+        public void MoveRightX()
         {
             this.x0 += speed;
+            this.point = new Point[] { new Point(x0, y0), new Point(x0 + WIDTH, y0 + HIGHT), new Point(x0, y0 + 2 * HIGHT), new Point(x0, y0) };
+        }
+
+        public void MoveLeftX()
+        {
+            this.x0 -= speed;
+            this.point = new Point[] { new Point(x0, y0), new Point(x0 + WIDTH, y0 + HIGHT), new Point(x0, y0 + 2 * HIGHT), new Point(x0, y0) };
         }
 
         /// <summary>
         /// Метод для перемещения танка по оси y
         /// </summary>
-        public void MoveY()
+        public void MoveDowbY()
         {
             this.y0 += speed;
+            this.point = new Point[] { new Point(x0, y0), new Point(x0 + WIDTH, y0 + HIGHT), new Point(x0, y0 + 2 * HIGHT), new Point(x0, y0) };
+        }
+
+        public void MoveUpY()
+        {
+            this.y0 -= speed;
+            this.point = new Point[] { new Point(x0, y0), new Point(x0 + WIDTH, y0 + HIGHT), new Point(x0, y0 + 2 * HIGHT), new Point(x0, y0) };
         }
 
         /// <summary>

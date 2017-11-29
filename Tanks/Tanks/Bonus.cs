@@ -9,8 +9,8 @@ namespace TanksClass
 {
     public class Bonus : Figures
     {
-        const int WIDTH = 5;
-        const int HIGHT = 5;
+        const int WIDTH = 10;
+        const int HIGHT = 10;
 
         public int x0 { get; private set; }
         public int y0 { get; private set; }
@@ -26,6 +26,17 @@ namespace TanksClass
             this.color = color;
             this.gameField = gameField;
         }
+
+        public int BonusWidth()
+        {
+            return WIDTH;
+        }
+
+        public int BonusHight()
+        {
+            return HIGHT;
+        }
+
 
         public override void ShowDraw()
         {
