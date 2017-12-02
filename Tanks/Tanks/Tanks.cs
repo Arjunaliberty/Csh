@@ -11,13 +11,16 @@ namespace TanksClass
     {
         const int WIDTH = 24;
         const int HIGHT = 8;
+        // Время действия бонуса
+        public int ttlBonus { get; set; }
+
         public int x0 { get; set; }
         public int y0 { get; set; }
         public int speed { get; set; }
         public int power { get; set; }
         public int armor { get; set; }
-        private Color color;
-        private GameField gameField = null;
+        public Color color;
+        public GameField gameField = null;
         private Point[] point;
 
         public Tanks(int x0, int y0, int speed, int power, int armor, Color color, GameField gameField)
@@ -32,11 +35,19 @@ namespace TanksClass
             this.point = new Point[] {new Point(x0, y0), new Point(x0 + WIDTH, y0 + HIGHT), new Point(x0, y0 + 2 * HIGHT), new Point(x0, y0)};
         }
 
+        /// <summary>
+        /// Метод возвращающий ширину танка
+        /// </summary>
+        /// <returns></returns>
         public int GetWidth()
         {
             return WIDTH;
         }
 
+        /// <summary>
+        /// Метод возвращает высоту танка
+        /// </summary>
+        /// <returns></returns>
         public int GetHight()
         {
             return HIGHT;
@@ -96,6 +107,67 @@ namespace TanksClass
         public Bullet Fire()
         {
             return new Bullet(GetAverageX(), GetAverageY(), 5, power, 30, color, gameField);
+        }
+
+        /// <summary>
+        /// Перегрузка метода для проверки проверки координа танка
+        /// </summary>
+        /// <param name="figure"></param>
+        /// <returns></returns>
+        public bool CheckTanks(Figures figures)
+        {
+            //if (figures is Wall)
+            //{
+            //    if (((GetAverageX() >= ((Wall)figures).x0) && ((GetAverageX() <= ((Wall)figures).x0 && GetAverageX() >= ((Wall)figures).GetWidth()))) && 
+            //       ((GetAverageY() >= ((Wall)figures).y0) && (GetAverageY() <= ((Wall)figures).y0 + ((Wall)figures).GetHight())))
+            //    {
+            //        return true;
+            //    }
+            //}
+            if (figures is Bonus)
+            {
+                if (((GetAverageX() >= ((Bonus)figures).x0) && ((GetAverageX() <= ((Bonus)figures).x0 + ((Bonus)figures).GetWidth()))) &&
+                   ((GetAverageY() >= ((Bonus)figures).y0) && (GetAverageY() <= ((Bonus)figures).y0 + ((Bonus)figures).GetHight())))
+                {
+                    return true;
+                }
+            }
+            //if (figures is Tanks)
+            //{
+            //    if (((GetAverageX() >= ((Tanks)figures).x0) && ((GetAverageX() <= ((Tanks)figures).x0 && GetAverageX() >= ((Tanks)figures).GetWidth()))) &&
+            //       ((GetAverageY() >= ((Tanks)figures).y0) && (GetAverageY() <= ((Tanks)figures).y0 + ((Tanks)figures).GetHight())))
+            //    {
+            //        return true;
+            //    }
+            //}
+
+            return false;
+        }
+
+        /// <summary>
+        /// Метод для провекрки координат танка при выходе за границу игрового поля
+        /// </summary>
+        /// <param name="gameField"></param>
+        /// <returns></returns>
+        public bool CheckBoundRight()
+        {
+            if (GetAverageX() >= gameField.maxX) return true;
+            return false;
+        }
+        public bool CheckBoundLeft()
+        {
+            if (x0 <= gameField.minX) return true;
+            return false;
+        }
+        public bool CheckBoundUp()
+        {
+            if (y0 <= gameField.minY) return true;
+            return false;
+        }
+        public bool CheckBoundDown()
+        {
+            if (GetAverageY() + HIGHT >= gameField.maxY)  return true;
+            return false;
         }
 
         public override void ShowDraw()

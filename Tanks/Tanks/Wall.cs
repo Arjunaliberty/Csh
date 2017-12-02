@@ -79,7 +79,7 @@ namespace TanksClass
         /// <param name="clrColor">Цвет канвы игрового поля</param>
         public override void ClearDraw(Color clrColor)
         {
-            gameField.graphics.FillRectangle(new SolidBrush(clrColor), x0, y0, x0 + WIDTH, y0 + HIGHT);
+            gameField.graphics.FillRectangle(new SolidBrush(clrColor), x0, y0, WIDTH, HIGHT);
         }
     }
 }

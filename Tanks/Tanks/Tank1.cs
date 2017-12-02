@@ -16,10 +16,7 @@ namespace TanksClass
 
         }
 
-        public override void TankBonus()
-        {
-
-        }
+        public override void TankBonus() {}
 
     }
 }

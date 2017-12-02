@@ -54,7 +54,7 @@ namespace TanksClass
         /// Метод для определения координаты x крайней точки снаряда
         /// </summary>
         /// <returns>Возвращает координату x крайней точки снаряда</returns>
-        public int GetAverageX()
+        private int GetAverageX()
         {
             return x0 + WIDTH;
         }
@@ -69,6 +69,44 @@ namespace TanksClass
             return y0;
         }
 
+        /// <summary>
+        /// Метод для проверки пересечения координат снаряда с другими объктами
+        /// </summary>
+        /// <returns></returns>
+        public bool CheckBullet(Figures figures)
+        {
+            // Проверяем является ли переданный объект стеной
+            if (figures is Wall)
+            {
+                if (((GetAverageX() >= ((Wall)figures).x0) && ((GetAverageX() <= ((Wall)figures).x0 + ((Wall)figures).GetWidth()))) && 
+                   ((y0 >= ((Wall)figures).y0) && (y0 <= ((Wall)figures).y0 + ((Wall)figures).GetHight())))
+                {
+                    return true;
+                }
+            }
+
+            // Проверяем является ли переданный объект бонусом
+            if (figures is Bonus)
+            {
+                if (((GetAverageX() >= ((Bonus)figures).x0) && ((GetAverageX() <= ((Bonus)figures).x0 + ((Bonus)figures).GetWidth()))) &&
+                   ((y0 >= ((Bonus)figures).y0) && (y0 <= ((Bonus)figures).y0 + ((Bonus)figures).GetHight())))
+                {
+                    return true;
+                }
+            }
+
+            // Проверяем является ли объект танком
+            if (figures is Tanks)
+            {
+                if (((GetAverageX() >= ((Tanks)figures).x0) && ((GetAverageX() <= ((Tanks)figures).x0 + ((Tanks)figures).GetWidth()))) &&
+                   ((y0 >= ((Tanks)figures).y0) && (y0 <= ((Tanks)figures).y0 + ((Tanks)figures).GetHight())))
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
 
         /// <summary>
         /// Метод отрисовки снаряда на экране

@@ -15,28 +15,29 @@ namespace TanksClass
         public int x0 { get; private set; }
         public int y0 { get; private set; }
         public int ttl { get; set; }
+        public int typeBonus { get; set; }
         Color color;
         GameField gameField;
 
-        public Bonus(int x0, int y0, int ttl, Color color, GameField gameField)
+        public Bonus(int x0, int y0, int ttl, int typeBonus, Color color, GameField gameField)
         {
             this.x0 = x0;
             this.y0 = y0;
             this.ttl = ttl;
             this.color = color;
+            this.typeBonus = typeBonus;
             this.gameField = gameField;
         }
 
-        public int BonusWidth()
+        public int GetWidth()
         {
             return WIDTH;
         }
 
-        public int BonusHight()
+        public int GetHight()
         {
             return HIGHT;
         }
-
 
         public override void ShowDraw()
         {
@@ -47,6 +48,5 @@ namespace TanksClass
         {
             gameField.graphics.FillRectangle(new SolidBrush(clrColor), x0, y0, WIDTH, HIGHT);
         }
-
     }
 }

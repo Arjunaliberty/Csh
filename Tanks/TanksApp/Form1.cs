@@ -43,42 +43,6 @@ namespace TanksApp
         }
 
         /// <summary>
-        /// Метод для проверки пересечения координат снаряда с другими объктами
-        /// </summary>
-        /// <returns></returns>
-        private bool CheckBullet(Figures bullet)
-        {
-            foreach (Figures item in figures)
-            {
-                 if (item is Bonus)
-                 {
-                     if ((((Bullet)bullet).GetAverageX() >= ((Bonus)item).x0 && (((Bullet)bullet).GetAverageX() <= ((Bonus)item).x0 + ((Bonus)item).BonusWidth())) && 
-                        ((((Bullet)bullet).GetAverageY() >= ((Bonus)item).y0) && (((Bullet)bullet).GetAverageY() <= ((Bonus)item).y0 + ((Bonus)item).BonusHight())))
-                     {
-                         return true;
-                     }
-                 }
-                 /*if (item is Tanks)
-                 {
-                     if ((((Bullet)bullet).GetAverageX() >= ((Tanks)item).x0) && 
-                        ((((Bullet)bullet).GetAverageY() >= ((Tanks)item).y0) && (((Bullet)bullet).GetAverageY() <= ((Tanks)item).y0 + ((Tanks)item).GetHight())))
-                     {
-                        return true;
-                     }
-                 }*/
-                 if (item is Wall)
-                 {
-                     if ((((Bullet)bullet).GetAverageX() >= ((Wall)item).x0) && 
-                        ((((Bullet)bullet).GetAverageY() >= ((Wall)item).y0) && (((Bullet)bullet).GetAverageY() <= ((Wall)item).y0 + ((Wall)item).GetHight())))
-                     {
-                        return true;
-                     }
-                 }
-            }
-            return false;
-        }
-
-        /// <summary>
         /// Метод для уничтожения объектов типа Bullet при пересечении с другими оъектами
         /// </summary>
         private void Bulletdestruction()
@@ -87,26 +51,40 @@ namespace TanksApp
 
             foreach (Figures bullet in figures)
             {
-                if(bullet is Bullet)
+                if (bullet is Bullet)
                 {
-                    if(CheckBullet(bullet))
+                    foreach (Figures fig in figures)
                     {
-
-                        // Неправильно работает, уничтожет все объекты типа Bonus
-                        foreach (Figures bonus in figures)
+                        if (fig is Wall)
                         {
-                            if (bonus is Bonus)
+                            if (((Bullet)bullet).CheckBullet(fig))
                             {
                                 bullet.ClearDraw(this.BackColor);
-                                delObject.Enqueue(bonus);
+                                delObject.Enqueue(bullet);
                             }
                         }
-
-                        bullet.ClearDraw(this.BackColor);
-                        delObject.Enqueue(bullet);
+                        if (fig is Bonus)
+                        {
+                            if (((Bullet)bullet).CheckBullet(fig))
+                            {
+                                bullet.ClearDraw(this.BackColor);
+                                fig.ClearDraw(this.BackColor);
+                                delObject.Enqueue(bullet);
+                                delObject.Enqueue(fig);
+                            }
+                        }
+                        if (fig is Tanks)
+                        {
+                            if(((Bullet)bullet).CheckBullet(fig))
+                            {
+                                bullet.ClearDraw(this.BackColor);
+                                fig.ClearDraw(this.BackColor);
+                                delObject.Enqueue(bullet);
+                                delObject.Enqueue(fig);
+                            }
+                        }
                     }
                 }
-                
             }
 
             while (delObject.Count > 0)
@@ -122,7 +100,7 @@ namespace TanksApp
         {
             Random rnd = new Random();
 
-            figures.Add(new Bonus(rnd.Next(2, this.Width - 24), rnd.Next(2, this.Height - 46), 50, Color.Coral, gameField));
+            figures.Add(new Bonus(rnd.Next(2, this.Width - 24), rnd.Next(2, this.Height - 46), 80, 1, Color.Coral, gameField));
         }
 
         /// <summary>
@@ -184,20 +162,145 @@ namespace TanksApp
             }
         }
 
-        private void timer1_Tick(object sender, EventArgs e)
+        private void TanksBonusAdd()
         {
-           
-            ClearFigutes();
-            Bulletdestruction();
-            TTL();
-            foreach (Figures item in figures)
+            Figures tankBonus = null;
+            Queue<Figures> delFigures = new Queue<Figures>();
+
+            foreach (Figures tank in figures)
             {
-                if(item is Bullet)
+                if (tank is Tanks)
                 {
-                    ((Bullet)item).MoveX();
+                    foreach (Figures bonus in figures)
+                    {
+                        if(bonus is Bonus)
+                        {
+                            if (((Tanks)tank).CheckTanks(bonus))
+                            {
+                                int a = ((Bonus)bonus).typeBonus;
+                                switch ((int)((Bonus)bonus).typeBonus)
+                                {
+                                    case 1:
+                                        if (tank is Tank1)
+                                        {
+                                            tank.ClearDraw(this.BackColor);
+                                            bonus.ClearDraw(this.BackColor);
+
+                                            tankBonus = new TanksDecorationArmorDown(((Tanks)tank));
+                                            ((Tanks)tankBonus).color = Color.Black;
+
+                                            delFigures.Enqueue(bonus);
+                                        }
+                                        break;
+                                    case 2:
+                                        break;
+                                    case 3:
+                                        break;
+                                    case 4:
+                                        break;
+                                    case 5:
+                                        break;
+                                    case 6:
+                                        break;
+                                }
+                            }
+                        }
+                    }
                 }
             }
-            ShowFigures();
+
+            if (tankBonus != null)
+            {
+                while (delFigures.Count > 0)
+                {
+                    figures.Remove(delFigures.Dequeue());
+                }
+
+                tank1 = tankBonus;
+            }
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            if (((Tanks)tank1).CheckBoundLeft())
+            {
+                ClearFigutes();
+                ((Tanks)tank1).x0 = gameField.minX;
+                Bulletdestruction();
+                //TanksBonusAdd();
+                TTL();
+                foreach (Figures item in figures)
+                {
+                    if (item is Bullet)
+                    {
+                        ((Bullet)item).MoveX();
+                    }
+                }
+                ShowFigures();
+            }
+            else if (((Tanks)tank1).CheckBoundRight())
+            {
+                ClearFigutes();
+                ((Tanks)tank1).x0 = gameField.maxX - ((Tanks)tank1).GetWidth();
+                Bulletdestruction();
+                //TanksBonusAdd();
+                TTL();
+                foreach (Figures item in figures)
+                {
+                    if (item is Bullet)
+                    {
+                        ((Bullet)item).MoveX();
+                    }
+                }
+                ShowFigures();
+            }
+            else if (((Tanks)tank1).CheckBoundUp())
+            {
+                ClearFigutes();
+                ((Tanks)tank1).y0 = gameField.minY;
+                Bulletdestruction();
+                //TanksBonusAdd();
+                TTL();
+                foreach (Figures item in figures)
+                {
+                    if (item is Bullet)
+                    {
+                        ((Bullet)item).MoveX();
+                    }
+                }
+                ShowFigures();
+            }
+            else if (((Tanks)tank1).CheckBoundDown())
+            {
+                ClearFigutes();
+                ((Tanks)tank1).y0 = gameField.maxY - 2 * ((Tanks)tank1).GetHight();
+                //Bulletdestruction();
+                TanksBonusAdd();
+                TTL();
+                foreach (Figures item in figures)
+                {
+                    if (item is Bullet)
+                    {
+                        ((Bullet)item).MoveX();
+                    }
+                }
+                ShowFigures();
+            }
+            else
+            {
+                ClearFigutes();
+                Bulletdestruction();
+                TanksBonusAdd();
+                TTL();
+                foreach (Figures item in figures)
+                {
+                    if (item is Bullet)
+                    {
+                        ((Bullet)item).MoveX();
+                    }
+                }
+                ShowFigures();
+            }
         }
 
         private void timer2_Tick(object sender, EventArgs e)
@@ -216,12 +319,13 @@ namespace TanksApp
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
+
         private void Form1_KeyPress(object sender, KeyPressEventArgs e)
         {
             switch (e.KeyChar)
             {
                 case ' ':
-                    figures.Add(((Tank1)tank1).Fire());
+                    figures.Add(((Tanks)tank1).Fire());
                     break;
                 case 'w':
                     tank1.ClearDraw(this.BackColor);
