@@ -41,7 +41,7 @@ namespace ConsoleApp1
             {
                 for (int j = 0; j < colums; j++)
                 {
-                    buffer[i, j] = rnd.Next(0, 100);
+                    buffer[i, j] = rnd.Next(0, 50);
                 }
             }
             m1 = new MatrixInt(buffer);

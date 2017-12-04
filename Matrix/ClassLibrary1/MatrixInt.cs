@@ -26,6 +26,11 @@ namespace ClassLibrary1
             return matrix[i, j];
         }
 
+        private int[,] GetMatrix()
+        {
+            return matrix;
+        }
+
         /// <summary>
         /// Метод для получения количество строк типа MatrixInt
         /// </summary>
@@ -180,6 +185,41 @@ namespace ClassLibrary1
                 }
                 Console.WriteLine();
             }
+        }
+
+        /// <summary>
+        /// Перегрузка метода Equals для сравнения матриц для передачи в качестве 
+        /// параметров методуAssert.AreEqual в качестве параметров
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
+        public override bool Equals(object obj)
+        {
+            bool flag = false;
+
+            if (!(obj is MatrixInt))
+            {
+                flag = false;
+            }
+            else
+            {
+                for (int i = 0; i < GetRows(); i++)
+                {
+                    for (int j = 0; j < GetColums(); j++)
+                    {
+                        if (((MatrixInt)obj).GetValue(i, j) == GetValue(i, j))
+                        {
+                            flag = true;
+                        }
+                        else
+                        {
+                            flag = false;
+                        }
+                    }
+                }
+            }
+
+            return flag;
         }
     }
 }
