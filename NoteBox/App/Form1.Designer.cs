@@ -107,14 +107,14 @@
             // loadToolStripMenuItem1
             // 
             this.loadToolStripMenuItem1.Name = "loadToolStripMenuItem1";
-            this.loadToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
+            this.loadToolStripMenuItem1.Size = new System.Drawing.Size(100, 22);
             this.loadToolStripMenuItem1.Text = "Load";
             this.loadToolStripMenuItem1.Click += new System.EventHandler(this.FileInfo_Load);
             // 
             // saveToolStripMenuItem1
             // 
             this.saveToolStripMenuItem1.Name = "saveToolStripMenuItem1";
-            this.saveToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
+            this.saveToolStripMenuItem1.Size = new System.Drawing.Size(100, 22);
             this.saveToolStripMenuItem1.Text = "Save";
             this.saveToolStripMenuItem1.Click += new System.EventHandler(this.FileInfo_Save);
             // 
@@ -130,14 +130,16 @@
             // loadToolStripMenuItem2
             // 
             this.loadToolStripMenuItem2.Name = "loadToolStripMenuItem2";
-            this.loadToolStripMenuItem2.Size = new System.Drawing.Size(100, 22);
+            this.loadToolStripMenuItem2.Size = new System.Drawing.Size(152, 22);
             this.loadToolStripMenuItem2.Text = "Load";
+            this.loadToolStripMenuItem2.Click += new System.EventHandler(this.FileStrea_Load);
             // 
             // saveToolStripMenuItem2
             // 
             this.saveToolStripMenuItem2.Name = "saveToolStripMenuItem2";
-            this.saveToolStripMenuItem2.Size = new System.Drawing.Size(100, 22);
+            this.saveToolStripMenuItem2.Size = new System.Drawing.Size(152, 22);
             this.saveToolStripMenuItem2.Text = "Save";
+            this.saveToolStripMenuItem2.Click += new System.EventHandler(this.FileStream_Save);
             // 
             // biteStreamToolStripMenuItem
             // 

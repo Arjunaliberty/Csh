@@ -7,7 +7,7 @@ namespace Library
     public class FileInfoWrapper
     {
         private String fileName { get; }
-        
+
         public FileInfoWrapper(String fileName)
         {
             this.fileName = fileName;

@@ -8,9 +8,9 @@ namespace Library
     {
 
         private static String fileName { get; set; }
-        
+
         public FileWrapper() { }
-              
+
         public static void SetFileName(String _fileName)
         {
             fileName = _fileName;
