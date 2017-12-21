@@ -8,5 +8,11 @@ namespace Library
 {
     public static class BinaryStreamWrapper
     {
+        public static String fileName { get; set; }
+
+        
+
+
+
     }
 }

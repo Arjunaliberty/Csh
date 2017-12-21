@@ -42,6 +42,7 @@
             this.biteStreamToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.loadToolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
             this.saveToolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -58,6 +59,7 @@
             this.textBox1.ScrollBars = System.Windows.Forms.ScrollBars.Both;
             this.textBox1.Size = new System.Drawing.Size(482, 440);
             this.textBox1.TabIndex = 0;
+            this.textBox1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.Seek_Save);
             // 
             // menuStrip1
             // 
@@ -130,14 +132,14 @@
             // loadToolStripMenuItem2
             // 
             this.loadToolStripMenuItem2.Name = "loadToolStripMenuItem2";
-            this.loadToolStripMenuItem2.Size = new System.Drawing.Size(152, 22);
+            this.loadToolStripMenuItem2.Size = new System.Drawing.Size(100, 22);
             this.loadToolStripMenuItem2.Text = "Load";
             this.loadToolStripMenuItem2.Click += new System.EventHandler(this.FileStrea_Load);
             // 
             // saveToolStripMenuItem2
             // 
             this.saveToolStripMenuItem2.Name = "saveToolStripMenuItem2";
-            this.saveToolStripMenuItem2.Size = new System.Drawing.Size(152, 22);
+            this.saveToolStripMenuItem2.Size = new System.Drawing.Size(100, 22);
             this.saveToolStripMenuItem2.Text = "Save";
             this.saveToolStripMenuItem2.Click += new System.EventHandler(this.FileStream_Save);
             // 
@@ -162,12 +164,23 @@
             this.saveToolStripMenuItem3.Size = new System.Drawing.Size(100, 22);
             this.saveToolStripMenuItem3.Text = "Save";
             // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Location = new System.Drawing.Point(269, 4);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(89, 17);
+            this.checkBox1.TabIndex = 2;
+            this.checkBox1.Text = "SaveToSeek";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.ClientSize = new System.Drawing.Size(484, 461);
+            this.Controls.Add(this.checkBox1);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
@@ -197,6 +210,7 @@
         private System.Windows.Forms.ToolStripMenuItem biteStreamToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem loadToolStripMenuItem3;
         private System.Windows.Forms.ToolStripMenuItem saveToolStripMenuItem3;
+        private System.Windows.Forms.CheckBox checkBox1;
     }
 }
 

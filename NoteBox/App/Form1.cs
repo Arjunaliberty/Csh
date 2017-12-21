@@ -1,5 +1,8 @@
 ﻿using Library;
 using System;
+using System.IO;
+using System.Text;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
 namespace App
@@ -7,7 +10,7 @@ namespace App
     public partial class Form1 : Form
     {
         private String fileName = null;
-
+       
         public Form1()
         {
             InitializeComponent();
@@ -15,7 +18,7 @@ namespace App
 
         private void Form1_Load(object sender, EventArgs e)
         {
-          
+            
         }
 
         private void File_Load(object sender, EventArgs e)
@@ -68,6 +71,26 @@ namespace App
             sfd.FileName = fileName;
             sfd.ShowDialog();
             FileStreamWrapper.SaveFile(textBox1.Text);
+        }
+
+        private void Seek_Save(object sender, KeyPressEventArgs e)
+        {
+            if(checkBox1.Checked == true)
+            {
+                String str = e.KeyChar.ToString();
+                byte[] buffer = new byte[str.Length];
+
+                if (Regex.IsMatch(str,"([a-zа-я0-9ё]|[\\r])", RegexOptions.IgnoreCase))
+                {
+                    buffer = Encoding.Default.GetBytes(str);
+                    using (FileStream fs = new FileStream(fileName, FileMode.Open))
+                    {
+                        fs.Seek(textBox1.SelectionStart, SeekOrigin.Begin);
+                        fs.Write(buffer, 0, buffer.Length);
+                        fs.Flush();
+                    }
+                }
+            }
         }
     }
 }
