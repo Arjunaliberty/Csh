@@ -81,13 +81,17 @@ namespace WindowsFormsApp1
         private void button2_Click(object sender, EventArgs e)
         {
             contextDB.Add(textBox1.Text, textBox2.Text, Convert.ToInt32(textBox3.Text), textBox4.Text, Convert.ToInt32(textBox5.Text));
-            listBox1.Items.Clear();
             showStudents();
             showCurStudent(contextDB.GetCurStudent());
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
+            if (listBox1.SelectedItem == null)
+            {
+                MessageBox.Show("Выберите студента в основном окне программы!");
+                return;
+            }
             Student find = (Student)listBox1.SelectedItem;
             Student replace = new Student(textBox1.Text, textBox2.Text, Convert.ToInt32(textBox3.Text), textBox4.Text, Convert.ToInt32(textBox5.Text));
             contextDB.Edit(find, replace);
