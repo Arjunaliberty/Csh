@@ -12,7 +12,8 @@ namespace WpfApp1
     /// </summary>
     public partial class MainWindow : Window
     {
-        ContextDB contextDB = new ContextDB();
+        public ContextDB contextDB = new ContextDB();
+        public bool editCheck = false;
 
         public MainWindow()
         {
@@ -67,9 +68,12 @@ namespace WpfApp1
 
         private void listBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            Student stud = (Student)listBox.SelectedItem;
-            contextDB.SetCurStudent(stud);
-            ShowCurrentStudent();
+            if (!editCheck)
+            {
+                Student stud = (Student)listBox.SelectedItem;
+                contextDB.SetCurStudent(stud);
+                ShowCurrentStudent();
+            }
         }
 
         private void button_prev_Click(object sender, RoutedEventArgs e)
@@ -87,6 +91,7 @@ namespace WpfApp1
 
         private void button_edit_Click(object sender, RoutedEventArgs e)
         {
+            editCheck = true;
             if (listBox.SelectedItem == null)
             {
                 MessageBox.Show("Выберите студента в основном окне программы!");
@@ -97,13 +102,21 @@ namespace WpfApp1
             contextDB.Edit(find, replace);
             ShowStudents();
             ShowCurrentStudent();
+            editCheck = false;
         }
 
         private void button_delete_Click(object sender, RoutedEventArgs e)
         {
+            editCheck = true;
+            if (listBox.SelectedItem == null)
+            {
+                MessageBox.Show("Выберите студента в основном окне программы!");
+                return;
+            }
             contextDB.Remove();
             ShowStudents();
             ShowCurrentStudent();
+            editCheck = false;
         }
 
         private void button_nex_Click(object sender, RoutedEventArgs e)
