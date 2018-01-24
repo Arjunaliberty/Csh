@@ -24,6 +24,11 @@
                 <MenuItem Name="SaveDB" Header="SaveDB" HorizontalAlignment="Left" Height="20" Width="130" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" Click="SaveDB_Click"/>
             </MenuItem>
             <MenuItem Name="Exit" Header="Exit" Height="20" Width="50" HorizontalAlignment="Left" HorizontalContentAlignment="Center" Click="Exit_Click"/>
+            <DockPanel Name="RadioButtonPanel" Height="21" LastChildFill="False" Width="260" >
+                <RadioButton x:Name="txt" Content="txt" Height="21" VerticalAlignment="Center" VerticalContentAlignment="Center" IsChecked="True" Margin="0, 0, 5, 0"/>
+                <RadioButton x:Name="xml" Content="xml" Height="21" VerticalAlignment="Center" VerticalContentAlignment="Center" Margin="0, 0, 5, 0"/>
+                <RadioButton x:Name="json" Content="json" Height="21" VerticalAlignment="Center" VerticalContentAlignment="Center" Margin="0, 0, 5, 0"/>
+            </DockPanel>
         </Menu>
         <ListBox x:Name="listBox" Margin="0" Grid.Row="1" SelectionChanged="listBox_SelectionChanged" Grid.ColumnSpan="2"/>
         <DockPanel Height="20" LastChildFill="False" Margin="0,0,0,1" Grid.Row="2" Grid.ColumnSpan="2">

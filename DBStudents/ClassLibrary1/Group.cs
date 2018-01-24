@@ -1,14 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Runtime.Serialization;
 
 namespace ClassLibrary1
 {
     public class Group
     {
+        [DataMember]
         public string name { get; set; }
+        [DataMember]
         public int kurs { get; set; }
 
         public Group()

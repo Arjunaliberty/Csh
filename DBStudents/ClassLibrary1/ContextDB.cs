@@ -5,10 +5,19 @@ using System.Linq;
 
 namespace ClassLibrary1
 {
+    /// <summary>
+    /// Перечесление определяющее тип файла для сохранения
+    /// </summary>
+    public enum TypeFile
+    {
+        txt,
+        xml,
+        json
+    }
+
     public class ContextDB
     {
         List<Student> students = new List<Student>();
-        FileStream fs;
         int curStudent = -1;
 
         public ContextDB()
@@ -40,52 +49,44 @@ namespace ClassLibrary1
             Remove(stdnt);
         }
 
-        public void LoadTXT(String path)
+        public void Load(String path, TypeFile typeFile)
         {
-            try
+            switch(typeFile)
             {
-                using(StreamReader sr = new StreamReader(File.OpenRead(path)))
-                {
-                    String line = null;
-                    String[] buffer = null;
-
-                    while((line = sr.ReadLine()) != null)
-                    {
-                        buffer = line.Split(' ');
-
-                        if (buffer.Length != 5)
-                        {
-                            throw new Exception();
-                        }
-
-                        students.Add(new Student(buffer[0], buffer[1], Convert.ToInt32(buffer[2]), buffer[3], Convert.ToInt32(buffer[4])));
-
-                    }
+                case TypeFile.txt:
+                    TextSerializerDB st = new TextSerializerDB(path);
+                    students = st.Load();
                     curStudent = students.Count - 1;
-                }
-            }
-            catch (Exception)
-            {
-                throw new InvalidFormatDataBaseException("Неверный формат данных в базе!"); 
+                    break;
+                case TypeFile.xml:
+                    XMLSerializerDB xml = new XMLSerializerDB(path);
+                    students = xml.Load();
+                    curStudent = students.Count - 1;
+                    break;
+                case TypeFile.json:
+                    JSONSerializerDB js = new JSONSerializerDB(path);
+                    students = js.Load();
+                    curStudent = students.Count - 1;
+                    break;
             }
         }
 
-        public void SaveTXT(String path)
+        public void Save(String path, TypeFile typeFile)
         {
-            try
+            switch (typeFile)
             {
-                using (StreamWriter sw = new StreamWriter(File.OpenWrite(path)))
-                {
-                    foreach (Student st  in students)
-                    {
-                        sw.WriteLine(st.ToString());
-                    }
-                }
-            }
-            catch (Exception)
-            {
-
-                throw;
+                case TypeFile.txt:
+                    TextSerializerDB st = new TextSerializerDB(path);
+                    st.Save(students);
+                    break;
+                case TypeFile.xml:
+                    XMLSerializerDB xml = new XMLSerializerDB(path);
+                    xml.Save(students);
+                    break;
+                case TypeFile.json:
+                    JSONSerializerDB js = new JSONSerializerDB(path);
+                    js.Save(students);
+                    break;
             }
         }
 

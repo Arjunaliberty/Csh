@@ -12,6 +12,7 @@ namespace WpfApp1
     /// </summary>
     public partial class MainWindow : Window
     {
+        public TypeFile typeFile;
         public ContextDB contextDB = new ContextDB();
         public bool editCheck = false;
 
@@ -47,7 +48,7 @@ namespace WpfApp1
             OpenFileDialog of = new OpenFileDialog();
 
             of.ShowDialog();
-            contextDB.LoadTXT(of.FileName);
+            contextDB.Load(of.FileName, typeFile);
             listBox.Items.Clear();
             ShowStudents();
             ShowCurrentStudent();
@@ -58,7 +59,7 @@ namespace WpfApp1
             SaveFileDialog sf = new SaveFileDialog();
 
             sf.ShowDialog();
-            contextDB.SaveTXT(sf.FileName);
+            contextDB.Save(sf.FileName, typeFile);
         }
 
         private void Exit_Click(object sender, RoutedEventArgs e)

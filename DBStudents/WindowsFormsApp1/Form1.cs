@@ -13,6 +13,7 @@ namespace WindowsFormsApp1
 {
     public partial class Form1 : Form
     {
+        TypeFile typeFile;
         ContextDB contextDB = new ContextDB();
         public Form1()
         {
@@ -58,18 +59,52 @@ namespace WindowsFormsApp1
 
         private void saveDBToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            SaveFileDialog sf = new SaveFileDialog();
-            sf.ShowDialog();
-            contextDB.SaveTXT(sf.FileName);
+            if(radioButton1.Checked)
+            {
+                SaveFileDialog sf = new SaveFileDialog();
+                sf.ShowDialog();
+                contextDB.Save(sf.FileName, TypeFile.txt);
+            }
+            if (radioButton2.Checked)
+            {
+                SaveFileDialog sf = new SaveFileDialog();
+                sf.ShowDialog();
+                contextDB.Save(sf.FileName, TypeFile.xml);
+            }
+            if (radioButton3.Checked)
+            {
+                SaveFileDialog sf = new SaveFileDialog();
+                sf.ShowDialog();
+                contextDB.Save(sf.FileName, TypeFile.json);
+            }
         }
 
         private void loadDBToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            OpenFileDialog of = new OpenFileDialog();
-            of.ShowDialog();
-            contextDB.LoadTXT(of.FileName);
-            showStudents();
-            showCurStudent(contextDB.GetCurStudent());
+            if(radioButton1.Checked)
+            {
+                OpenFileDialog of = new OpenFileDialog();
+                of.ShowDialog();
+                contextDB.Load(of.FileName, TypeFile.txt);
+                showStudents();
+                showCurStudent(contextDB.GetCurStudent());
+            }
+            if (radioButton2.Checked)
+            {
+                OpenFileDialog of = new OpenFileDialog();
+                of.ShowDialog();
+                contextDB.Load(of.FileName, TypeFile.xml);
+                showStudents();
+                showCurStudent(contextDB.GetCurStudent());
+            }
+            if (radioButton3.Checked)
+            {
+                OpenFileDialog of = new OpenFileDialog();
+                of.ShowDialog();
+                contextDB.Load(of.FileName, TypeFile.json);
+                showStudents();
+                showCurStudent(contextDB.GetCurStudent());
+            }
         }
 
         private void button1_Click(object sender, EventArgs e)

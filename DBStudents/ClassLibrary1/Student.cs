@@ -1,18 +1,25 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Runtime.Serialization;
 
 namespace ClassLibrary1
 {
+    /// <summary>
+    /// Аннотация необходимая для сереализации в xml-file
+    /// </summary>
+    [Serializable]
+    /// <summary>
+    /// Аннотация необходимая для сереализации в json-file
+    /// </summary>
+    [DataContract]
     public class Student
     {
+        [DataMember]
         public string familyName { get; set; }
+        [DataMember]
         public string name { get; set; }
-
+        [DataMember]
         public int age { get; set; }
-
+        [DataMember]
         public Group group { get; set; }
 
         public Student()
@@ -23,8 +30,7 @@ namespace ClassLibrary1
             group = null;
         }
 
-        public Student(string familyName, string name, int age, 
-            string nameGroup, int kurs)
+        public Student(String familyName, String name, int age, String nameGroup, int kurs)
         {
             this.familyName = familyName;
             this.name = name;

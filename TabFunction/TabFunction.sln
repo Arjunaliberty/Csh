@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.26730.15
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TabFunctionLibrary", "TabfunctionLibrary\TabFunctionLibrary.csproj", "{979B6B0C-C6F9-4064-A8F1-95A8249C26D1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TabFunctionApp", "ConsoleApp1\TabFunctionApp.csproj", "{96B44D24-D9C0-44C7-8BF3-3BBE7A03AE00}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{979B6B0C-C6F9-4064-A8F1-95A8249C26D1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{979B6B0C-C6F9-4064-A8F1-95A8249C26D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{979B6B0C-C6F9-4064-A8F1-95A8249C26D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{979B6B0C-C6F9-4064-A8F1-95A8249C26D1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{96B44D24-D9C0-44C7-8BF3-3BBE7A03AE00}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{96B44D24-D9C0-44C7-8BF3-3BBE7A03AE00}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{96B44D24-D9C0-44C7-8BF3-3BBE7A03AE00}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{96B44D24-D9C0-44C7-8BF3-3BBE7A03AE00}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {89132ABB-0CFC-4CED-BF7F-767A8B0FF2D9}
+	EndGlobalSection
+EndGlobal
